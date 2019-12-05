@@ -6,7 +6,7 @@ namespace Scorecardio;
 
 class ScorecardExecutor {
 
-	private const BASE_URL = 'https://scorecardapi.simbuka.test';
+	private const BASE_URL = 'https://scorecards.simbuka.com';
 
 	private $api_token;
 
@@ -45,18 +45,16 @@ class ScorecardExecutor {
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept: application/json']);
-			// TODO remove these 2. Temporary
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			
 			$result = curl_exec($ch);
 			$curl_errno = curl_errno($ch);
 			if ($curl_errno > 0) {
-				return false;
+				return ['error' => 'An error has occurred'];
 			}
 			curl_close($ch);
 			return json_decode($result, true);
 		} catch (\Exception $e) {
-			return false;
+			return ['error' => 'An error has occurred'];
 		}
 	}
 
