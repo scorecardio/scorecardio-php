@@ -4,7 +4,7 @@
 namespace Scorecardio;
 
 
-class ScorecardExecutor {
+class Scorecard {
 
 	private const BASE_URL = 'https://scorecard.simbuka.com';
 

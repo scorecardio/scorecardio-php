@@ -18,8 +18,8 @@ composer require scorecardio/scorecardio-php
 Simple usage looks like:
 
 ```php
-$scorecard_executor = new \Scorecardio\ScorecardExecutor('token');
-$result = $scorecard_executor->executePublishedScorecard('Partner name', 'Scorecard name', [
+$scorecard = new \Scorecardio\Scorecard('4eC39HqLyjWDarjtT1zdp7dc');
+$result = $scorecard->executePublishedScorecard('Partner name', 'Scorecard name', [
             'work_contract' => 'yes',
             'nationality' => 'Netherlands',
             'date_of_birth' => '21-11-1990',
