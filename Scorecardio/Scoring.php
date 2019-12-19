@@ -8,6 +8,7 @@ class Scoring extends CurlExecutor {
 
 	private $identifier;
 
+
 	public function fetchScoring($identifier) {
 		$this->identifier = $identifier;
 
@@ -15,6 +16,7 @@ class Scoring extends CurlExecutor {
 
 		return $this->executeCurlRequest($url, []);
 	}
+
 
 	protected function buildUrl() {
 		$identifier = htmlentities(rawurlencode($this->identifier));

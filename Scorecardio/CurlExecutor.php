@@ -8,13 +8,19 @@ abstract class CurlExecutor {
 
 	protected const BASE_URL = 'https://scorecard.simbuka.com';
 
+	private const CONNECT_TIMEOUT = 10;
+	private const TIMEOUT = 60;
+
 	protected $api_token;
+
 
 	public function __construct($api_token) {
 		$this->api_token = $api_token;
 	}
 
+
 	abstract protected function buildUrl();
+
 
 	protected function executeCurlRequest($url, $arguments) {
 		try {
@@ -25,8 +31,8 @@ abstract class CurlExecutor {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($arguments));
 			curl_setopt($ch, CURLOPT_HEADER, false);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::CONNECT_TIMEOUT);
+			curl_setopt($ch, CURLOPT_TIMEOUT, self::TIMEOUT);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept: application/json']);
 
 			$result = curl_exec($ch);
