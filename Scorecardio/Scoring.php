@@ -19,7 +19,7 @@ class Scoring extends CurlExecutor {
 	protected function buildUrl() {
 		$identifier = htmlentities(rawurlencode($this->identifier));
 
-		return self::BASE_URL . "/scorecard/{$identifier}";
+		return self::BASE_URL . "/scoring/{$identifier}";
 	}
 
 }
