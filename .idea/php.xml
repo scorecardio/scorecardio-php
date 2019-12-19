@@ -5,5 +5,10 @@
       <PhpCSConfiguration max_messages_per_file="100" tool_path="$PROJECT_DIR$/../cregoratool/bin/phpcs" />
     </phpcs_settings>
   </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
 </project>
