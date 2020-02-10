@@ -17,6 +17,11 @@ class Scorecard extends CurlExecutor {
 
 	public function executeScorecardVersion($partner_name, $scorecard_name, $version_number, $arguments) {
 		$this->version_number = $version_number;
+
+		if (empty($version_number) || !is_numeric($this->version_number)) {
+			return ['error' => 'Invalid version number'];
+		}
+
 		return $this->executeScorecard($partner_name, $scorecard_name, $arguments);
 	}
 
@@ -32,6 +37,14 @@ class Scorecard extends CurlExecutor {
 		$this->scorecard_name = $scorecard_name;
 		$this->request_type = self::EXECUTION;
 
+		if (empty($this->partner_name)) {
+			return ['error' => 'Invalid partner name'];
+		}
+
+		if (empty($this->scorecard_name)) {
+			return ['error' => 'Invalid scorecard name'];
+		}
+
 		$url = $this->buildUrl();
 		return $this->executeCurlRequest($url, $arguments);
 	}
@@ -39,6 +52,11 @@ class Scorecard extends CurlExecutor {
 
 	public function fetchArgumentsOfScorecardVersion($partner_name, $scorecard_name, $version_number) {
 		$this->version_number = $version_number;
+
+		if (empty($version_number) || !is_numeric($this->version_number)) {
+			return ['error' => 'Invalid version number'];
+		}
+
 		return $this->fetchArgumentsOfScorecard($partner_name, $scorecard_name);
 	}
 
@@ -54,6 +72,14 @@ class Scorecard extends CurlExecutor {
 		$this->scorecard_name = $scorecard_name;
 		$this->request_type = self::ARGUMENTS;
 
+		if (empty($this->partner_name)) {
+			return ['error' => 'Invalid partner name'];
+		}
+
+		if (empty($this->scorecard_name)) {
+			return ['error' => 'Invalid scorecard name'];
+		}
+
 		$url = $this->buildUrl();
 		return $this->executeCurlRequest($url, []);
 	}
@@ -66,7 +92,7 @@ class Scorecard extends CurlExecutor {
 		$url = self::BASE_URL . "/{$partner_name}/scorecard/{$scorecard_name}";
 
 		if (!empty($this->version_number)) {
-			$version_number = htmlentities(rawurlencode($this->scorecard_name));
+			$version_number = htmlentities(rawurlencode($this->version_number));
 			$url .= "/{$version_number}";
 		}
 
